@@ -6,51 +6,47 @@ from os import path
 from pymediainfo import MediaInfo
 
 
-def convert_imgs2vid(
-    image_names_sequence: List[str], output_file_path: str, fps: int
+def convert_vid2imgs(
+    input_video_path: str, output_folder_path: str, img_names_prefix: str
 ) -> None:
-    media_info = MediaInfo.parse(image_names_sequence[0])
-    image_track = media_info.image_tracks[0]
 
-    video_writer = cv.VideoWriter(
-        output_file_path,
-        cv.VideoWriter_fourcc("M", "J", "P", "G"),
-        fps,
-        (image_track.width, image_track.height),
+    video_reader = cv.VideoCapture(
+        input_video_path
     )
 
-    for img_path in image_names_sequence:
-        img = cv.imread(img_path)
-        video_writer.write(img)
-    video_writer.release()
+
+    has_frame, frame = video_reader.read()
+    img_num = 0
+    while has_frame:
+        img_name = f"{img_names_prefix}_{img_num}.png"
+        cv.imwrite(path.join(output_folder_path, img_name), frame)
+        img_num += 1
+        has_frame, frame = video_reader.read()
+    video_reader.release()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Converts image sequence to video based on lexicographical order of image files."
+        description="Converts video into image frames. Frames are named after the video file name."
     )
     parser.add_argument(
         "-i",
-        "--input_seq",
+        "--input-video",
         type=str,
         required=True,
-        help="Folder path containing images.",
-    )
-    parser.add_argument(
-        "-fps", "--fps", type=int, required=False, default=15, help="Output video FPS."
+        help="Absolute video file path.",
     )
     parser.add_argument(
         "-o",
-        "--output_folder",
+        "--output-folder",
         type=str,
         required=True,
-        help="Output folder path. Generated video file has the same name as input folder name.",
+        help="Output folder path.",
     )
 
     args = parser.parse_args()
-    video_file_name = path.dirname(args.input_seq)
-    output_file_name = path.join(args.output_folder, video_file_name)
-    img_paths = glob.glob(args.input_seq)
-    convert_imgs2vid(
-        sorted(img_paths, key=str.lower), output_file_name,
+    _, video_file_name_with_ext = path.split(args.input_video)
+    video_file_name, _ = path.splitext(video_file_name_with_ext)
+    convert_vid2imgs(
+        args.input_video, args.output_folder, video_file_name
     )
