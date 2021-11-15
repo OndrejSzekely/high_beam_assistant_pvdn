@@ -10,10 +10,7 @@ def convert_vid2imgs(
     input_video_path: str, output_folder_path: str, img_names_prefix: str
 ) -> None:
 
-    video_reader = cv.VideoCapture(
-        input_video_path
-    )
-
+    video_reader = cv.VideoCapture(input_video_path)
 
     has_frame, frame = video_reader.read()
     img_num = 0
@@ -37,16 +34,10 @@ if __name__ == "__main__":
         help="Absolute video file path.",
     )
     parser.add_argument(
-        "-o",
-        "--output-folder",
-        type=str,
-        required=True,
-        help="Output folder path.",
+        "-o", "--output-folder", type=str, required=True, help="Output folder path.",
     )
 
     args = parser.parse_args()
     _, video_file_name_with_ext = path.split(args.input_video)
     video_file_name, _ = path.splitext(video_file_name_with_ext)
-    convert_vid2imgs(
-        args.input_video, args.output_folder, video_file_name
-    )
+    convert_vid2imgs(args.input_video, args.output_folder, video_file_name)

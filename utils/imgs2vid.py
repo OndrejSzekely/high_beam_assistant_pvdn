@@ -51,6 +51,4 @@ if __name__ == "__main__":
     _, video_file_name = path.split(args.input_seq)
     output_file_name = path.join(args.output_folder, video_file_name)
     img_paths = glob.glob(path.join(args.input_seq, "*.*"))
-    convert_imgs2vid(
-        sorted(img_paths, key=str.lower), output_file_name, args.fps
-    )
+    convert_imgs2vid(sorted(img_paths, key=str.lower), output_file_name, args.fps)
