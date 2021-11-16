@@ -1,0 +1,6 @@
+blur_kernel_size: 7
+local_intensity_win: 19
+dynamic_threshold_factor: 0.4
+opening_kernel_h: 5
+opening_kernel_w: 5
+dilatation_distance: 7
