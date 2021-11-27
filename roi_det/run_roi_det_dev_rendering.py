@@ -39,12 +39,12 @@ if __name__ == "__main__":
     cum_time = 0
     for img_name, img in image_gen:
         start_time = time()
-        preprocessed_img = roi_alg.preprocess(img)
-        bboxes = roi_alg.compute(preprocessed_img)
+        preprocessed_img, bboxes = roi_alg.compute(img)
         end_time = time()
         cum_time += end_time - start_time
         vized_roi_det_img = visualize_bboxes(img, bboxes)
         cv.imwrite(path.join(args.output_folder, img_name + ".jpg"), vized_roi_det_img)
         imgs_num += 1
+
     print(f"ROIs detection latency per image: {cum_time/imgs_num * 1000:.2f} ms")
     print(f"ROIs detection FPS: {imgs_num / cum_time:.2f} fps")

@@ -1,2 +1,7 @@
+hyperopt==0.2.7
+numpy==1.19.4
 opencv_python_headless==4.5.4.58
 pymediainfo==5.1.0
+PyYAML==6.0
+Shapely==1.8.0
+tensorflow==2.6.0+nv

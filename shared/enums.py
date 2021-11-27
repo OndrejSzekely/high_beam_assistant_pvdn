@@ -10,3 +10,8 @@ class RoiDetMethods(enum.Enum):
     @staticmethod
     def get_choices():
         return [e.name.lower() for e in RoiDetMethods]
+
+class PVDNSets(enum.Enum):
+    TRAIN = "train"
+    VAL = "val"
+    TEST = "test"

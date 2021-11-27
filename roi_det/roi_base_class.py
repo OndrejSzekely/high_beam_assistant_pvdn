@@ -1,13 +1,9 @@
 import abc
 from abc import abstractmethod
 import numpy as np
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 class RoiDetBase(abc.ABC):
-
-    @abstractmethod
-    def preprocess(self, img: np.ndarray) -> np.ndarray:
-        pass
 
     @staticmethod
     @abstractmethod
@@ -15,7 +11,7 @@ class RoiDetBase(abc.ABC):
         pass
 
     @abstractmethod
-    def compute(self, img: np.ndarray) -> List[Tuple[int, int, int, int]]:
+    def compute(self, img: np.ndarray) -> Tuple[Optional[np.ndarray], List[Tuple[int, int, int, int]]]:
        pass
 
     @property

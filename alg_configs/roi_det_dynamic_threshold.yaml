@@ -1,6 +1,7 @@
-blur_kernel_size: 7
+blur_kernel_size: 25
 local_intensity_win: 19
 dynamic_threshold_factor: 0.4
-opening_kernel_h: 5
-opening_kernel_w: 5
-dilatation_distance: 7
+opening_kernel: 1
+margin_distance: 4
+minimal_roi_mean_abs_dev: 0.01
+processing_scaling_factor: 0.5

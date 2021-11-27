@@ -13,7 +13,7 @@ def convert_imgs2vid(
     image_track = media_info.image_tracks[0]
 
     video_writer = cv.VideoWriter(
-        output_file_path + ".mp4",
+        output_file_path + ".avi",
         cv.VideoWriter_fourcc("M", "J", "P", "G"),
         fps,
         (image_track.width, image_track.height),

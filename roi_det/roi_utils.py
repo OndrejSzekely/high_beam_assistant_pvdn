@@ -1,6 +1,6 @@
 import sys
 from roi_det.dynamic_thresholding import DynamicThresholding
-from roi_base_class import RoiDetBase
+from roi_det.roi_base_class import RoiDetBase
 from shared.enums import RoiDetMethods
 
 def get_roi_alg(roi_alg: RoiDetMethods) -> RoiDetBase:
